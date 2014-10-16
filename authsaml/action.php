@@ -11,7 +11,6 @@
  * @author  François Kooman
  * @author  Thijs Kinkhorst, Universiteit van Tilburg
  * @author  Jorge Hervás <jordihv@gmail.com>, Lukas Slansky <lukas.slansky@upce.cz>
-
  * @license GPL2 http://www.gnu.org/licenses/gpl.html
  * @link https://github.com/pitbulk/dokuwiki-saml
  */
@@ -98,9 +97,10 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
 	 */
 	function handle_login_form(&$event, $param)
 	{
-        global $auth;
+    global $auth;
+		if(!is_a($auth, 'auth_plugin_authsaml')) return; // SAML not used
 
-        $this->saml->get_ssp_instance();
+		$this->saml->get_ssp_instance();
 
 		$fieldset  = '<fieldset height="400px" style="margin-bottom:20px;"><legend padding-top:-5px">'.$this->getLang('saml_connect').'</legend>';
 		$fieldset .= '<center><a href="'.$this->saml->ssp->getLoginURL().'"><img src="lib/plugins/authsaml/logo.gif" alt="uniquid - saml"></a><br>';
