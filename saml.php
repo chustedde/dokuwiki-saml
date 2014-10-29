@@ -76,13 +76,10 @@ class saml_handler {
      * @return string|null
      */
     public function getUserData($user) {
-        if ($this->use_internal_user_store) {
-            global $auth;
-            return $auth->getUserData($user);
-        }
-        else {
+        if ($this->use_internal_user_store)
             return $this->getFILEUserData($user);
-        }
+        else
+            return $this->getSAMLUserData();
     }
 
     public function checkPass($user) {
