@@ -141,6 +141,11 @@ class saml_handler {
                 $grps = $this->attributes[$this->simplesaml_grps];
             }
 
+            // Make group names DokuWiki-friendly
+            foreach ($grps as $key => $value) {
+                $grps[$key] = str_replace(' ', '_', $value);
+            }
+
             return array(
                 'name' => $name,
                 'mail' => $mail,
